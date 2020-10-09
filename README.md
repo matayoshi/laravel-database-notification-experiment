@@ -9,6 +9,15 @@
 - macOS Catalina 10.15.x
 - SQLite
 
+### SQLiteの設定
+
+ファイルを作成して`DB_DATABASE`環境変数に絶対パスを指定するか、省略して初期値を利用する。  
+初期値は `database/database.sqlite` の絶対パスが設定されます。
+
+```
+touch database/database.sqlite
+```
+
 ## ドキュメント
 
 - [Notifications - Laravel - The PHP Framework For Web Artisans](https://laravel.com/docs/7.x/notifications)
