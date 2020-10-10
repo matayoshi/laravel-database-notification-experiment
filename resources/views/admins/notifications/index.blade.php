@@ -21,6 +21,12 @@
     </form>
 </p>
 <p>
+    <form action="/admins/{{ $admin->id }}/notify" method="post">
+        @csrf
+        <button type="submit">create notifications(notify AdminNotification)</button>
+    </form>
+</p>
+<p>
     <form action="/admins/{{ $admin->id }}/notifications" method="post">
         @csrf
         @method('delete')

@@ -6,6 +6,8 @@ use App\UserNotification;
 use App\AdminNotification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use App\Notifications\UserNotification as NotificationsUserNotification;
+use App\Notifications\AdminNotification as NotificationsAdminNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,10 @@ Route::post('/users/{user}/notifications', function (User $user) {
     $user->notifications()->save($notification);
     return redirect("/users/{$user->id}/notifications");
 });
+Route::post('/users/{user}/notify', function (User $user) {
+    $user->notify(new NotificationsUserNotification());
+    return redirect("/users/{$user->id}/notifications");
+});
 Route::delete('/users/{user}/notifications', function (User $user) {
     $user->notifications()->delete();
     return redirect("/users/{$user->id}/notifications");
@@ -51,6 +57,10 @@ Route::get('/admins/{admin}/notifications', function (Admin $admin) {
 Route::post('/admins/{admin}/notifications', function (Admin $admin) {
     $notification = factory(AdminNotification::class)->make();
     $admin->notifications()->save($notification);
+    return redirect("/admins/{$admin->id}/notifications");
+});
+Route::post('/admins/{admin}/notify', function (Admin $admin) {
+    $admin->notify(new NotificationsAdminNotification());
     return redirect("/admins/{$admin->id}/notifications");
 });
 Route::delete('/admins/{admin}/notifications', function (Admin $admin) {
