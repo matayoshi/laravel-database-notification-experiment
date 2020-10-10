@@ -15,7 +15,7 @@ class CreateUserNotificationsTable extends Migration
     {
         Schema::create('user_notifications', function (Blueprint $table) {
             // $table->id();
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained();
             $table->string('title')->nullable();
             $table->text('body')->nullable();

@@ -15,7 +15,7 @@ class CreateAdminNotificationsTable extends Migration
     {
         Schema::create('admin_notifications', function (Blueprint $table) {
             // $table->id();
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignId('admin_id')->constrained();
             $table->string('title')->nullable();
             $table->text('body')->nullable();
