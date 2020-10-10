@@ -25,7 +25,7 @@ class AdminNotification extends Model
         self::creating(function (self $model): void {
             // UUID未指定時は自動生成
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = Str::uuid();
+                $model->{$model->getKeyName()} = Str::uuid()->toString();
             }
         });
     }
