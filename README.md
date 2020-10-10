@@ -18,10 +18,18 @@
 touch database/database.sqlite
 ```
 
-## ドキュメント
+## マイグレーション
 
-- [Notifications - Laravel - The PHP Framework For Web Artisans](https://laravel.com/docs/7.x/notifications)
-- [通知 7.x Laravel](https://readouble.com/laravel/7.x/ja/notifications.html)
+```
+php artisan migrate
+```
+
+## シーディング
+
+```
+composer dump-autoload
+php artisan db:seed
+```
 
 ## 環境の起動
 
@@ -30,6 +38,11 @@ php artisan serve
 ```
 
 http://localhost:8000 にアクセス
+
+## 参考ドキュメント
+
+- [Notifications - Laravel - The PHP Framework For Web Artisans](https://laravel.com/docs/7.x/notifications)
+- [通知 7.x Laravel](https://readouble.com/laravel/7.x/ja/notifications.html)
 
 ## License
 

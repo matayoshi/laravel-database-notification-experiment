@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\RoutesNotifications;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     // use Notifiable;
     use RoutesNotifications;
@@ -39,8 +39,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function notifications(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(UserNotification::class);
+        return $this->hasMany(AdminNotification::class);
     }
 }

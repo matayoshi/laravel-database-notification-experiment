@@ -1,5 +1,10 @@
 <?php
 
+use App\User;
+use App\Admin;
+use App\UserNotification;
+use App\AdminNotification;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +19,41 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $users = User::oldest()->get();
+    $admins = Admin::oldest()->get();
+    return view('welcome', ['users' => $users, 'admins' => $admins]);
+});
+
+Route::get('/users/{user}', function (User $user) {
+    return view('users.index', ['user' => $user]);
+});
+Route::get('/users/{user}/notifications', function (User $user) {
+    $notifications = $user->notifications()->latest()->get();
+    return view('users.notifications.index', ['user' => $user, 'notifications' => $notifications]);
+});
+Route::post('/users/{user}/notifications', function (User $user) {
+    $notification = factory(UserNotification::class)->make();
+    $user->notifications()->save($notification);
+    return redirect("/users/{$user->id}/notifications");
+});
+Route::delete('/users/{user}/notifications', function (User $user) {
+    $user->notifications()->delete();
+    return redirect("/users/{$user->id}/notifications");
+});
+
+Route::get('/admins/{admin}', function (Admin $admin) {
+    return view('admins.index', ['admin' => $admin]);
+});
+Route::get('/admins/{admin}/notifications', function (Admin $admin) {
+    $notifications = $admin->notifications()->latest()->get();
+    return view('admins.notifications.index', ['admin' => $admin, 'notifications' => $notifications]);
+});
+Route::post('/admins/{admin}/notifications', function (Admin $admin) {
+    $notification = factory(AdminNotification::class)->make();
+    $admin->notifications()->save($notification);
+    return redirect("/admins/{$admin->id}/notifications");
+});
+Route::delete('/admins/{admin}/notifications', function (Admin $admin) {
+    $admin->notifications()->delete();
+    return redirect("/admins/{$admin->id}/notifications");
 });
